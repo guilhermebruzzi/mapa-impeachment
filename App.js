@@ -1,4 +1,6 @@
 import React from 'react';
+// import getJson from './request';
+// getJson("https://raw.githubusercontent.com/schweller/mapa-impeachment/master/mapa-congresso.json", () => {});
 import {GoogleMapLoader, GoogleMap, Marker} from "react-google-maps";
 
 class App extends React.Component {
