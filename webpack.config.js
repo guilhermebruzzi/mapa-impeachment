@@ -18,11 +18,6 @@ module.exports = {
           presets: ['es2015', 'react']
         }
       }
-      // {
-      //   test: /\.js$/,
-      //   exclude: /node_modules/,
-      //   loader: 'uglify'
-      // }
     ]
   }
 }

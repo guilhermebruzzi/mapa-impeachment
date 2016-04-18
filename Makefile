@@ -5,4 +5,4 @@ run:
 	npm start
 
 build:
-	webpack
+	webpack -optimize-minimize
