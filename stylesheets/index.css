@@ -1,5 +1,9 @@
+.main-content {
+    max-width: 100%;
+}
+
 .map-container {
-    min-height: 80vh;
+    min-height: 95vh;
     width: 100%;
     margin: 0 auto;
     position: relative;
