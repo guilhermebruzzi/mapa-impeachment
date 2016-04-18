@@ -1,0 +1,6 @@
+{
+  "name": "Mapa-impeachment",
+  "tagline": "Mapeamento de como cada deputado/senador votou!",
+  "body": "# mapa-impeachment\r\nMapeamento de como cada deputado/senador votou!\r\n\r\n## [mapa-congresso.json](https://github.com/schweller/mapa-impeachment/blob/master/mapa-congresso.json)\r\nJSON com informações de como votou cada deputado federal no dia 17/04/2016\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
