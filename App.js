@@ -1,6 +1,5 @@
 import React from 'react';
-// import getJson from './request';
-// getJson("https://raw.githubusercontent.com/schweller/mapa-impeachment/master/mapa-congresso.json", () => {});
+import update from 'react-addons-update';
 
 import GoogleMap from "react-google-maps/lib/GoogleMap";
 import GoogleMapLoader from "react-google-maps/lib/GoogleMapLoader";
@@ -10,17 +9,10 @@ import InfoWindow from "react-google-maps/lib/InfoWindow";
 class App extends React.Component {
   constructor(props, context) {
     super(props, context);
+
     this.state = {
-      markers: [{
-        position: {
-          lat: -15.1756207,
-          lng: -47.4374355,
-        },
-        title: `Deputado`,
-        state: `RR`,
-        defaultAnimation: 2,
-        showInfo: false
-      }],
+      initialMarkers: props.markers,
+      markers: update(props.markers, {$merge: {}}),
     };
   }
 
@@ -32,6 +24,14 @@ class App extends React.Component {
 
   handleMarkerClose(marker) {
     marker.showInfo = false;
+    this.setState(this.state);
+  }
+
+  handleMapClick() {
+    this.state.markers.forEach((marker) => {
+      marker.showInfo = false;
+    });
+
     this.setState(this.state);
   }
 
@@ -79,6 +79,7 @@ class App extends React.Component {
               ref={(map) => this.map = map}
               defaultZoom={4}
               title='Mapa do impeachment (17/04/2016)'
+              onClick={this.handleMapClick.bind(this)}
               defaultCenter={{lat: -15.1756207, lng: -47.4374355}}>
                 {markers}
             </GoogleMap>

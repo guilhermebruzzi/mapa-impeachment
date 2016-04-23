@@ -1,4 +1,4 @@
-createXhrObject = (method, url) => {
+const createXhrObject = (method, url) => {
   let xhr = new XMLHttpRequest();
 
   const cors = url.indexOf(location.host) === -1 || !stringStartsWith(url, "/");
@@ -15,10 +15,10 @@ createXhrObject = (method, url) => {
   return xhr;
 };
 
-getJson = (url, onSuccess) => {
+const getJson = (url, onSuccess) => {
   const request = createXhrObject("GET", url);
 
-  isJsonData = true;
+  let isJsonData = true;
 
   request.onload = () => {
     const success = (request.status >= 200 && request.status < 400);
@@ -40,4 +40,4 @@ getJson = (url, onSuccess) => {
   request.send();
 };
 
-export default App;
+export default getJson;
