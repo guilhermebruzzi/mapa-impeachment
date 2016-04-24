@@ -7,5 +7,28 @@
     width: 100%;
     margin: 0 auto;
     position: relative;
-    border: 1px solid #ccc;
+    border: 0.0625rem solid #ccc;
+}
+
+.legenda {
+    font-size: 1rem;
+    color: #333;
+    display: inline-block;
+    width: 100%;
+}
+
+.legenda-line + .legenda-line {
+    margin-left: 0.5rem;
+}
+
+.legenda-line img {
+    width: 1rem;
+    height: auto;
+}
+
+@media (min-width: 900px) {
+    .legenda {
+        margin-left: 1rem;
+        width: auto;
+    }
 }

@@ -10,8 +10,11 @@ class App extends React.Component {
   constructor(props, context) {
     super(props, context);
 
+    const isMobile = (window.innerWidth < 768) ? true : false;
+
     this.state = {
       initialMarkers: props.markers,
+      defaultZoom: (isMobile) ? 4 : 5,
       markers: update(props.markers, {$merge: {}}),
     };
   }
@@ -42,7 +45,7 @@ class App extends React.Component {
         onCloseclick={this.handleMarkerClose.bind(this, marker)}>
 
         <div>
-          {marker.title} - {marker.state}
+          Deputado: {marker.title} - {marker.state} <br /> Voto: {marker.vote}
         </div>
 
       </InfoWindow>
@@ -77,7 +80,7 @@ class App extends React.Component {
           googleMapElement={
             <GoogleMap
               ref={(map) => this.map = map}
-              defaultZoom={4}
+              defaultZoom={this.state.defaultZoom}
               title='Mapa do impeachment (17/04/2016)'
               onClick={this.handleMapClick.bind(this)}
               defaultCenter={{lat: -15.1756207, lng: -47.4374355}}>

@@ -1,10 +1,5 @@
 import getJson from './request';
-
-const geoUFLocation = {
-  AC: {lat: -9.975377, lng: -67.82489770000001},
-  RR: {lat: 2.8235098, lng: -60.67583309999998},
-  RJ: {lat: -22.9068467, lng: -43.17289649999998},
-};
+import geoUFLocation from './brazil-uf-location';
 
 const getRandomInt = (min, max) => {
   return Math.floor(Math.random() * (max - min)) + min;
@@ -21,14 +16,18 @@ const getPinImage = (pinColor) => {
 };
 
 const utils = {
-  getGeoLocation(uf) {
+  getRandomDiff() {
+    const minDiff = 0.002;
     const sign = (getRandomInt(0, 2) === 0) ? -1 : 1;
-    const minDiff = 0.001;
-    const randomDiff = sign * minDiff * getRandomInt(1, 1001);
-    if (uf !== "AC" && uf !== "RR") {
+    return sign * minDiff * getRandomInt(1, 1001);
+  },
+  getGeoLocation(uf) {
+    const randomLatDiff = this.getRandomDiff();
+    const randomLngDiff = this.getRandomDiff();
+    if (typeof geoUFLocation[uf] === "undefined") {
       uf = "RJ";
     }
-    return {lat: geoUFLocation[uf].lat + randomDiff, lng: geoUFLocation[uf].lng + randomDiff};
+    return {lat: geoUFLocation[uf].lat + randomLatDiff, lng: geoUFLocation[uf].lng + randomLngDiff};
   },
   getMarkersFromJsonUrl(jsonUrl, callback) {
     getJson(jsonUrl, (json) => {
@@ -37,9 +36,10 @@ const utils = {
       const pinDownImage = getPinImage(pinDownColor);
       json.forEach((vote) => {
         markers.push({
-          position: utils.getGeoLocation(vote.UF),
+          position: this.getGeoLocation(vote.UF),
           title: vote.Nome,
           icon: (vote.Voto === "A favor") ? pinUpImage : pinDownImage,
+          vote: vote.Voto,
           state: vote.UF,
           region: vote.Regiao,
           defaultAnimation: 2,
